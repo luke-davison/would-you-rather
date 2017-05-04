@@ -7,8 +7,9 @@ function saveChoice (winner, loser) {
   updateRankings(winIndex, loseIndex)
 }
 
-function getOptions () {
+function getOptions (op1, op2) {
   let options = {}
+
   const rNum1 = Math.floor(Math.random() * mainArray.length)
   let rNum2 = Math.floor(Math.random() * mainArray.length)
   while (rNum1 === rNum2) {
@@ -42,8 +43,6 @@ function findIndex (id) {
 }
 
 function updateRankings (winIndex, loseIndex) {
-  console.log(winIndex, mainArray)
-  console.log(mainArray[winIndex].rank, getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank))
   mainArray[winIndex].rank += getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
   mainArray[loseIndex].rank -= getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
 }

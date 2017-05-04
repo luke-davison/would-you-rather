@@ -38,6 +38,11 @@ router.get('/wouldyourather/:win/:lose', (req, res) => {
   res.redirect('/wouldyourather?name=' + req.query.name)
 })
 
+/*router.get('/reload/:op1/:op2', (req, res) => {
+  let options = {}
+
+})*/
+
 router.get('/rankings', (req, res) => {
   //  load the rankings page
   let rankings = processes.getRankings()  //  format {table: ['string', 'string', 'string']}
