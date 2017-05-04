@@ -1,5 +1,6 @@
 const express = require('express')
 const hbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 
 const routes = require('./routes')
 
@@ -12,6 +13,7 @@ const hbsConfig = {
 
 app.engine('hbs', hbs(hbsConfig))
 app.set('view engine', 'hbs')
+app.use(bodyParser.urlencoded({extended: false}))
 app.use('/', routes)
 
 module.exports = app
