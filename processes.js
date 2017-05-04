@@ -23,7 +23,7 @@ function getOptions () {
 
 function getRankings () {
   let sortedArray = mainArray.sort((a, b) => a.rank - b.rank)
-  let table = sortedArray.map((x) => x.question)
+  let table = sortedArray.map((x) => x.question + '  ,  ' + x.rank)
   return {table: table}
 }
 
@@ -42,6 +42,8 @@ function findIndex (id) {
 }
 
 function updateRankings (winIndex, loseIndex) {
+  console.log(winIndex, mainArray)
+  console.log(mainArray[winIndex].rank, getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank))
   mainArray[winIndex].rank += getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
   mainArray[loseIndex].rank -= getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
 }
