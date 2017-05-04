@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tape tests/tests.js | tap-diff",
     "start": "node index.js",
     "dev": "nodemon index"
   },
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/paul-brabet/wouldYouRather#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0"
   },
