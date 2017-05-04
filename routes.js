@@ -23,6 +23,8 @@ router.get('/wouldyourather/', (req, res) => {
   let options = processes.getOptions()   //  format {option1: 'string', option2: 'string'}
 
   options.name = req.query.name //  so that this name can be added to the heading and hyperlinks
+  options.option1url = `wouldyourather/${options.option1}/${options.option2}/?name=${req.query.name}`
+  options.option2url = `wouldyourather/${options.option2}/${options.option1}/?name=${req.query.name}`
 
   res.render('game', options)
 })
