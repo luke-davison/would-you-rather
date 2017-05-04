@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 router.get('/welcome', (req, res) => {
   //  load the welcome page
-  res.render('index')
+  res.render('index', {home: 'welcome'})
 })
 
 router.post('/welcome', (req, res) => {
@@ -25,6 +25,8 @@ router.get('/wouldyourather/', (req, res) => {
   options.name = req.query.name //  so that this name can be added to the heading and hyperlinks
   options.option1url = `wouldyourather/${options.id1}/${options.id2}/?name=${req.query.name}`
   options.option2url = `wouldyourather/${options.id2}/${options.id1}/?name=${req.query.name}`
+  options.rankingurl = `rankings?name=${req.query.name}`
+  options.homeurl = '#'
 
   res.render('game', options)
 })
@@ -41,8 +43,9 @@ router.get('/rankings', (req, res) => {
   let rankings = processes.getRankings()  //  format {table: ['string', 'string', 'string']}
 
   rankings.name = req.query.name  //  so that this name can be added to the heading and hyperlinks
+  rankings.homeurl = `wouldyourather?name=${req.query.name}`
 
-  res.render('/ranking', rankings)
+  res.render('ranking', rankings)
 })
 
 module.exports = router
