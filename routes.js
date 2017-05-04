@@ -20,11 +20,11 @@ router.post('/welcome', (req, res) => {
 
 router.get('/wouldyourather/', (req, res) => {
   //  load the main game page
-  let options = processes.getOptions()   //  format {option1: 'string', option2: 'string'}
+  let options = processes.getOptions()   //  format {option1: 'string', id1: number, option2: 'string', id2: number}
 
   options.name = req.query.name //  so that this name can be added to the heading and hyperlinks
-  options.option1url = `wouldyourather/${options.option1}/${options.option2}/?name=${req.query.name}`
-  options.option2url = `wouldyourather/${options.option2}/${options.option1}/?name=${req.query.name}`
+  options.option1url = `wouldyourather/${options.id1}/${options.id2}/?name=${req.query.name}`
+  options.option2url = `wouldyourather/${options.id2}/${options.id1}/?name=${req.query.name}`
 
   res.render('game', options)
 })

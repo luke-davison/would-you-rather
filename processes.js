@@ -1,8 +1,8 @@
 var mainArray = require('./start')
 
 function saveChoice (winner, loser) {
-  const winIndex = findIndex(winner)
-  const loseIndex = findIndex(loser)
+  const winIndex = findIndex(Number(winner))
+  const loseIndex = findIndex(Number(loser))
 
   updateRankings(winIndex, loseIndex)
 }
@@ -15,7 +15,9 @@ function getOptions () {
     rNum2 = Math.floor(Math.random() * mainArray.length)
   }
   options.option1 = mainArray[rNum1].question
+  options.id1 = mainArray[rNum1].id
   options.option2 = mainArray[rNum2].question
+  options.id2 = mainArray[rNum2].id
   return options
 }
 
@@ -40,8 +42,8 @@ function findIndex (id) {
 }
 
 function updateRankings (winIndex, loseIndex) {
-  mainArray[winIndex] += getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
-  mainArray[loseIndex] -= getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
+  mainArray[winIndex].rank += getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
+  mainArray[loseIndex].rank -= getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
 }
 
 function getAdjustment (winnerRank, loserRank) {
