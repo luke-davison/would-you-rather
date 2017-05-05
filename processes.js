@@ -12,14 +12,12 @@ function saveChoice (winner, loser) {
 
 function getOptions (op1, op2) {
   let options = {}
-  let op1Index = 0
-  let op2Index = 0
 
   options.id1 = Number(op1)
-  op1Index = findIndex(options.id1)
+  const op1Index = findIndex(options.id1)
 
   options.id2 = Number(op2)
-  op2Index = findIndex(options.id2)
+  const op2Index = findIndex(options.id2)
 
   options.option1 = mainArray[op1Index].question
   options.option2 = mainArray[op2Index].question
@@ -37,9 +35,9 @@ function getRankings () {
       bp = b.wins / b.count
     }
     if (ap === bp) {
-      return a.rank - b.rank
+      return b.rank - a.rank
     }
-    return ap - bp
+    return bp - ap
   })
   let table = sortedArray.map((x) => {
     if (x.count === 0) {

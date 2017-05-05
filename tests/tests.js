@@ -38,9 +38,7 @@ test('getRankings returns an object containing a table of percentages and questi
   const actual = processes.getRankings()
   let expected = 'object'
   t.ok(typeof actual === expected, 'an object is returned')
-  expected = 'array'
-  t.ok(typeof actual.table === expected, 'that object has an array in the table property')
-  expected = 20
-  t.equals(actual.table.length === expected, 'the array has 20 entries')
-
+  expected = 31
+  t.equals(actual.table.length, expected, 'the array has 31 entries')
+  t.end()
 })
