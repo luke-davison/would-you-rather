@@ -44,8 +44,57 @@
   background-color: blue;
 }
 
-a {
+.questionOne > a, .questionTwo > a {
   margin: 0.5em;
+}
+
+a > p {
+  margin: 0;
+}
+
+
+.footer {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  bottom: 1em;
+}
+
+.footer > .ranking {
+  width: 50%;
+  margin-left: 3em;
+}
+
+.footer > .reset {
+  width: 50%;
+  text-align: right;
+  margin-right: 3em;
+}
+
+.ranking > p, .reset > p {
+  width: 100%;
+}
+
+/* Welcome page*/
+.twelve {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.twelve > p {
+  font-size: 2em;
+  text-align: center;
+}
+
+form > label {
+  font-size: 1.3em;
 }
 
 @media (min-width: 500px) {
@@ -64,7 +113,7 @@ a {
   }
 
   .app {
-    height: 70vw;
-    margin-bottom: 5em;
+    height: 75vh;
+    margin: 5em 0;
   }
 }
