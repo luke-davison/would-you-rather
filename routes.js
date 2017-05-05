@@ -15,40 +15,43 @@ router.get('/welcome', (req, res) => {
 
 router.post('/welcome', (req, res) => {
   //  redirects to the main game page, retaining the name as a query
-  res.redirect('/wouldyourather?name=' + req.body.name)
+  const options = processes.getRandomOptions()
+  res.redirect(`/wouldyourather/${options[0]}/${options[1]}/0?name=${req.body.name}`)
 })
 
-router.get('/wouldyourather/', (req, res) => {
-  //  load the main game page
-  let options = processes.getOptions()   //  format {option1: 'string', id1: number, option2: 'string', id2: number}
+router.get('/wouldyourather/:op1/:op2/:taunt', (req, res) => {
+  let options = processes.getOptions(req.params.op1, req.params.op2)
 
   options.name = req.query.name //  so that this name can be added to the heading and hyperlinks
-  options.option1url = `wouldyourather/${options.id1}/${options.id2}/?name=${req.query.name}`
-  options.option2url = `wouldyourather/${options.id2}/${options.id1}/?name=${req.query.name}`
-  options.rankingurl = `rankings?name=${req.query.name}`
-  options.homeurl = '#'
+  options.option1url = `/wouldyourather/submit/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
+  options.option2url = `/wouldyourather/submit/${options.id2}/${options.id1}/${req.params.taunt}?name=${req.query.name}`
+  options.rankingurl = `/rankings/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
+  options.homeurl = `/wouldyourather/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
+  options.taunt = "Choose Wisely"
+  options.cantchoose = "I can't choose!"
+  options.cantchooseurl = `/wouldyourather/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
 
   res.render('game', options)
 })
 
-router.get('/wouldyourather/:win/:lose', (req, res) => {
+router.get('/wouldyourather/submit/:win/:lose/:taunt', (req, res) => {
   //  save the win and lose results and reload the game page
   processes.saveChoice(req.params.win, req.params.lose)
+  const options = processes.getRandomOptions()
 
-  res.redirect('/wouldyourather?name=' + req.query.name)
+  res.redirect(`/wouldyourather/${options[0]}/${options[1]}/${req.params.taunt}?name=${req.query.name}`)
 })
 
-/*router.get('/reload/:op1/:op2', (req, res) => {
-  let options = {}
+router.get('/wouldyourather/cantchoose/:op1/:op2/:taunt', (req, res) => {
+  //  redirect back to the game page with a new taunt
+})
 
-})*/
-
-router.get('/rankings', (req, res) => {
+router.get('/rankings/:op1/:op2/:taunt', (req, res) => {
   //  load the rankings page
   let rankings = processes.getRankings()  //  format {table: ['string', 'string', 'string']}
 
   rankings.name = req.query.name  //  so that this name can be added to the heading and hyperlinks
-  rankings.homeurl = `wouldyourather?name=${req.query.name}`
+  rankings.homeurl = `/wouldyourather/${req.params.op1}/${req.params.op2}/${req.params.taunt}?name=${req.query.name}`
 
   res.render('ranking', rankings)
 })
