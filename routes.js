@@ -23,12 +23,12 @@ router.get('/wouldyourather/:op1/:op2/:taunt', (req, res) => {
   let options = processes.getOptions(req.params.op1, req.params.op2)
 
   options.name = req.query.name //  so that this name can be added to the heading and hyperlinks
-  options.option1url = `/wouldyourather/submit/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
-  options.option2url = `/wouldyourather/submit/${options.id2}/${options.id1}/${req.params.taunt}?name=${req.query.name}`
+  options.option1url = `/wouldyourather/submit/${options.id1}/${options.id2}/0?name=${req.query.name}`
+  options.option2url = `/wouldyourather/submit/${options.id2}/${options.id1}/0?name=${req.query.name}`
   options.rankingurl = `/rankings/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
-  options.homeurl = `/wouldyourather/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
+  options.homeurl = `/wouldyourather/${options.id1}/${options.id2}/h${req.params.taunt}?name=${req.query.name}`
 
-  options.taunt = processes.getTaunt(req.params.taunt)
+  options.taunt = processes.getTaunt(req.params.taunt, req.query.name)
   options.cantchoose = processes.getCantChoose(req.params.taunt)
   const nextTaunt = processes.getNextTaunt(req.params.taunt)
   options.cantchooseurl = `/wouldyourather/${options.id1}/${options.id2}/${nextTaunt}?name=${req.query.name}`
