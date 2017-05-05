@@ -27,9 +27,11 @@ router.get('/wouldyourather/:op1/:op2/:taunt', (req, res) => {
   options.option2url = `/wouldyourather/submit/${options.id2}/${options.id1}/${req.params.taunt}?name=${req.query.name}`
   options.rankingurl = `/rankings/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
   options.homeurl = `/wouldyourather/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
-  options.taunt = "Choose Wisely"
-  options.cantchoose = "I can't choose!"
-  options.cantchooseurl = `/wouldyourather/${options.id1}/${options.id2}/${req.params.taunt}?name=${req.query.name}`
+
+  options.taunt = processes.getTaunt(req.params.taunt)
+  options.cantchoose = processes.getCantChoose(req.params.taunt)
+  const nextTaunt = processes.getNextTaunt(req.params.taunt)
+  options.cantchooseurl = `/wouldyourather/${options.id1}/${options.id2}/${nextTaunt}?name=${req.query.name}`
 
   res.render('game', options)
 })
