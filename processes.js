@@ -5,6 +5,9 @@ function saveChoice (winner, loser) {
   const loseIndex = findIndex(Number(loser))
 
   updateRankings(winIndex, loseIndex)
+  mainArray[winIndex].wins ++
+  mainArray[winIndex].count ++
+  mainArray[loseIndex].count ++
 }
 
 function getOptions (op1, op2) {
@@ -18,23 +21,62 @@ function getOptions (op1, op2) {
   options.id2 = Number(op2)
   op2Index = findIndex(options.id2)
 
-  console.log(op1Index, op2Index)
   options.option1 = mainArray[op1Index].question
   options.option2 = mainArray[op2Index].question
   return options
 }
 
 function getRankings () {
-  let sortedArray = mainArray.sort((a, b) => a.rank - b.rank)
-  let table = sortedArray.map((x) => x.question + '  ,  ' + x.rank)
+  let sortedArray = mainArray.sort((a, b) => {
+    let ap = 0.5
+    let bp = 0.5
+    if (a.count > 0) {
+      ap = a.wins / a.count
+    }
+    if (b.count > 0) {
+      bp = b.wins / b.count
+    }
+    if (ap === bp) {
+      return a.rank - b.rank
+    }
+    return ap - bp
+  })
+  let table = sortedArray.map((x) => {
+    if (x.count === 0) {
+      return {
+        question: x.question,
+        percentage: '50%'
+      }
+    }
+    return {
+      question: x.question,
+      percentage: Math.floor(x.wins / x.count * 100) + '%'
+    }
+  })
   return {table: table}
 }
 
 module.exports = {
-  saveChoice: saveChoice,
-  getOptions: getOptions,
-  getRankings: getRankings,
-  getRandomOptions: getRandomOptions
+  saveChoice,
+  getOptions,
+  getRankings,
+  getRandomOptions,
+  getTaunt,
+  getNextTaunt,
+  getCantChoose
+}
+
+
+function getNextTaunt (tauntNum) {
+  return Number(tauntNum) + 1
+}
+
+function getCantChoose (tauntNum) {
+  return 'I can\'t choose'
+}
+
+function getTaunt (tauntNum) {
+  return 'Choose wisely'
 }
 
 function findIndex (id) {
@@ -51,9 +93,9 @@ function updateRankings (winIndex, loseIndex) {
 }
 
 function getAdjustment (winnerRank, loserRank) {
-  return 1
-  //  const K = 10
-  //  return K * (1 - 1 / (1 + Math.pow(10, ((loserRank - winnerRank) / 400))))
+  //return 1
+    const K = 40
+    return Math.floor(K * (1 - 1 / (1 + Math.pow(10, ((loserRank - winnerRank) / 400)))))
 }
 
 function getRandomOptions () {

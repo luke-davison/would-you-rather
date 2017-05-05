@@ -1,7 +1,20 @@
 <div class="rankingTable">
+  <div class = "headings">
+    <div class = "percentage">
+      <p>... percent of people</p>
+    </div>
+    <div class = "question">
+      <p> would prefer to ... over the alternative
+    </div>
+  </div>
   {{#each table}}
     <div class="row">
-      {{this}}
+      <div class="percentage">
+        {{percentage}}
+      </div>
+      <div class="question">
+        {{question}}
+      </div>
     </div>
   {{/each}}
 </div>
