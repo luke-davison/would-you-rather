@@ -2,6 +2,10 @@ body {
   background-color: #f5f3ee;
 }
 
+a {
+  text-decoration: none;
+}
+
 .app {
   display: flex;
   align-items: center;
@@ -60,43 +64,55 @@ body {
   font-weight: bold;
 }
 
-
-
+.afterQuestions {
+  text-align: center;
+}
 
 .footer {
   display: flex;
   width: 100%;
   position: fixed;
   bottom: 1em;
+  justify-content: space-between;
 }
 
-.footer > .ranking {
-  width: 50%;
+.ranking, .reset, .homeLink {
+  background-color: rgba(0,0,0,.5);
+  padding: 0.5em;
+  border-radius: 15px;
+  color: #FFFFFF;
+}
+
+.ranking {
   margin-left: 3em;
 }
 
-.footer > .reset {
-  width: 50%;
+.reset {
   text-align: right;
   margin-right: 3em;
 }
 
-.ranking > p, .reset > p {
-  width: 100%;
-}
 
 /* Welcome page*/
 .twelve {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #F5F1EE;
+  /*background-color: #DDE0D9;*/
+  border: solid 2px black;
+  padding: 2em 0;
+  border-radius: 20px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
+}
+
+.form > input {
+  margin: 0;
 }
 
 .twelve > p {
@@ -125,6 +141,8 @@ form > label {
 
 .table-title {
   font-weight: bold;
+  background-color: rgba(134, 137, 150, 0.3);
+  font-family: sans-serif;
 }
 
 .table-title > td {
@@ -136,6 +154,12 @@ td {
   padding: 0;
   text-align: center;
   height: 10vh;
+}
+
+.homeLink {
+  position: absolute;
+  top: 1em;
+  left: 1em;
 }
 
 @media (min-width: 500px) {
