@@ -1,7 +1,32 @@
 <div class="rankingTable">
-  {{#each table}}
-    <div class="row">
-      {{this}}
-    </div>
-  {{/each}}
+  <div class = "headings">
+    <!-- <div class = "percentage"> -->
+      <!-- <p>... percent of people would prefer to ... over the alternative</p> -->
+    <!-- </div> -->
+    <!-- <div class = "question">
+      <p> would prefer to ... over the alternative</p>
+    </div> -->
+  </div>
+  <table>
+    <tr class="table-title">
+      <td class="left-col">percent of people</td>
+      <td>would rather</td>
+    </tr>
+    {{#each table}}
+    <tr>
+      <div class="row">
+        <div class="percentage">
+          <td class="left-col">
+          {{percentage}}
+        </td>
+        </div>
+        <div class="question">
+          <td>
+          {{question}}
+          </td>
+        </div>
+      </div>
+    </tr>
+    {{/each}}
+  </table>
 </div>
