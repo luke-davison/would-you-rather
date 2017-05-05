@@ -1,11 +1,70 @@
-body {
+.app {
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+  justify-content: center;
 }
 
 .questionIntro {
-  
+  display: flex;
+  text-align: center;
+}
+
+.gameView {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 4em;
+}
+
+.gameView > h2 {
+  margin: 0.5em 0.5em;
+}
+
+.homeLink {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.questionOne, .questionTwo {
+  width: 90vw;
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.questionOne {
+  background-color: red;
+}
+
+.questionTwo {
+  background-color: blue;
+}
+
+a {
+  margin: 0.5em;
 }
 
 @media (min-width: 500px) {
+  .gameView {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
 
+  .questionOne, .questionTwo {
+    width: 30vw;
+  }
+
+  .questionIntro {
+    margin-bottom: 5em;
+  }
+
+  .app {
+    height: 70vw;
+    margin-bottom: 5em;
+  }
 }
