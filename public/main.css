@@ -23,7 +23,7 @@ a {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 4em;
+  padding-bottom: 2em;
 }
 
 .gameView > h2 {
@@ -66,6 +66,7 @@ a {
 
 .afterQuestions {
   text-align: center;
+
 }
 
 .footer {
