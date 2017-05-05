@@ -7,9 +7,9 @@ test('test setup working', function (t) {
   t.end()
 })
 
-test('getOptions returns a object with two strings in parameters', function (t) {
+test('getOptions returns an object with two strings in parameters', function (t) {
   const expected = 'string'
-  const actual = processes.getOptions()
+  const actual = processes.getOptions('1', '2')
   if (actual.hasOwnProperty('option1')) {
     t.pass('object has option1 property')
     t.ok(typeof actual.option1 === expected, 'option1 is a string: ' + actual.option1)
@@ -23,4 +23,24 @@ test('getOptions returns a object with two strings in parameters', function (t) 
     t.fail('object does not have an option2 property')
   }
   t.end()
+})
+
+test('getOptions also returns the parameters as IDs', function (t) {
+  const values = ['1', '2']
+  const actual = processes.getOptions(values[0], values[1])
+  t.equals(Number(values[0]), actual.id1, 'id1 is the same parameter that was entered')
+  t.equals(Number(values[1]), actual.id2, 'id2 is the same parameter that was entered')
+
+  t.end()
+})
+
+test('getRankings returns an object containing a table of percentages and questions', function (t) {
+  const actual = processes.getRankings()
+  let expected = 'object'
+  t.ok(typeof actual === expected, 'an object is returned')
+  expected = 'array'
+  t.ok(typeof actual.table === expected, 'that object has an array in the table property')
+  expected = 20
+  t.equals(actual.table.length === expected, 'the array has 20 entries')
+
 })
