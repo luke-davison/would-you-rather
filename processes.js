@@ -7,17 +7,20 @@ function saveChoice (winner, loser) {
   updateRankings(winIndex, loseIndex)
 }
 
-function getOptions () {
+function getOptions (op1, op2) {
   let options = {}
-  const rNum1 = Math.floor(Math.random() * mainArray.length)
-  let rNum2 = Math.floor(Math.random() * mainArray.length)
-  while (rNum1 === rNum2) {
-    rNum2 = Math.floor(Math.random() * mainArray.length)
-  }
-  options.option1 = mainArray[rNum1].question
-  options.id1 = mainArray[rNum1].id
-  options.option2 = mainArray[rNum2].question
-  options.id2 = mainArray[rNum2].id
+  let op1Index = 0
+  let op2Index = 0
+
+  options.id1 = Number(op1)
+  op1Index = findIndex(options.id1)
+
+  options.id2 = Number(op2)
+  op2Index = findIndex(options.id2)
+
+  console.log(op1Index, op2Index)
+  options.option1 = mainArray[op1Index].question
+  options.option2 = mainArray[op2Index].question
   return options
 }
 
@@ -30,7 +33,8 @@ function getRankings () {
 module.exports = {
   saveChoice: saveChoice,
   getOptions: getOptions,
-  getRankings: getRankings
+  getRankings: getRankings,
+  getRandomOptions: getRandomOptions
 }
 
 function findIndex (id) {
@@ -42,8 +46,6 @@ function findIndex (id) {
 }
 
 function updateRankings (winIndex, loseIndex) {
-  console.log(winIndex, mainArray)
-  console.log(mainArray[winIndex].rank, getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank))
   mainArray[winIndex].rank += getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
   mainArray[loseIndex].rank -= getAdjustment(mainArray[winIndex].rank, mainArray[loseIndex].rank)
 }
@@ -52,4 +54,16 @@ function getAdjustment (winnerRank, loserRank) {
   return 1
   //  const K = 10
   //  return K * (1 - 1 / (1 + Math.pow(10, ((loserRank - winnerRank) / 400))))
+}
+
+function getRandomOptions () {
+  const op1Index = Math.floor(Math.random() * mainArray.length)
+  let results = []
+  results.push(mainArray[op1Index].id)
+  let op2Index = Math.floor(Math.random() * mainArray.length)
+  while (op2Index === op1Index) {
+    op2Index = Math.floor(Math.random() * mainArray.length)
+  }
+  results.push(mainArray[op2Index].id)
+  return results
 }
