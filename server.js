@@ -11,6 +11,8 @@ const hbsConfig = {
   defaultLayout: 'main'
 }
 
+app.use(express.static('public'))
+
 app.engine('hbs', hbs(hbsConfig))
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({extended: false}))

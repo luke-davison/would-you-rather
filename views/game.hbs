@@ -2,31 +2,36 @@
   <h2>{{name}}! Would you rather ...</h2>
 </div>
 <div class="gameView">
-  <div class="questionOne">
-    <a href="{{option1url}}">
+  <a href="{{option1url}}">
+    <div class="questionOne">
       <p>{{option1}}</p>
-    </a>
-  </div>
+    </div>
+  </a>
   <h2>OR</h2>
-  <div class="questionTwo">
-    <a href="{{option2url}}">
+  <a href="{{option2url}}">
+    <div class="questionTwo">
       <p>{{option2}}</p>
-    </a>
+    </div>
+  </a>
+</div>
+
+<div class="afterQuestions">
+  <div class="taunt">
+    <p>{{taunt}}</p>
   </div>
   <div class="cantchoose">
     <a href="{{cantchooseurl}}">
       <p>{{cantchoose}}</p>
     </a>
   </div>
-  <div class="taunt">
-    <p>{{taunt}}</p>
+
+</div>
+
+<div class="footer">
+  <div class="ranking">
+    <p><a href="{{rankingurl}}">Rankings</a></p>
   </div>
-  <div class="footer">
-    <div class="ranking">
-      <p><a href="{{rankingurl}}">Rankings</a></p>
-    </div>
-    <div class="reset">
-      <p><a href="/">Reset Game</a></p>
-    </div>
+  <div class="reset">
+    <p><a href="/">Reset Game</a></p>
   </div>
 </div>
